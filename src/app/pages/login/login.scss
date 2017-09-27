@@ -1,0 +1,27 @@
+@import "../../app.mixim";
+
+.login{
+   @include flex-column;
+    height: 100%;
+    .login-header{
+        height:10vh;
+        background: lightgrey;
+        width:100%;
+        font-size: 5vmin;
+        font-weight: bold;
+        @include flex-center;
+    }
+    .login-container {
+        @include flex-center;
+        height:100%;
+        .login-sub-container{
+            background-color: red;
+            @include flex-column-center;
+            width: 50vmin;
+            height:50vmin
+        }
+    }
+}
+.margin-1{
+    margin:1vh 1vw;
+}
