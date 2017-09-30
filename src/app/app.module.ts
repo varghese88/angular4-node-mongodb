@@ -1,9 +1,10 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { AppComponent } from "./app.component";
 import { AppRoutesModule } from "./app.routes";
+import { AuthenthicationService } from "./services/authenthication.service";
+
 import "./app.scss";
 
 @NgModule({
@@ -14,7 +15,7 @@ import "./app.scss";
     ],    
     declarations:[AppComponent],
     bootstrap:[AppComponent],
-    providers:[]
+    providers:[AuthenthicationService]
 })
 
 export class AppModule {}

@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-
+import { AuthenthicationService } from "./../../services/authenthication.service" 
 @Component({
     selector:'login',
     template:`
@@ -10,11 +10,11 @@ import { Router } from "@angular/router";
             <div class="login-sub-container">
                 <div>
                     <div>Username</div>
-                    <input type="text" />
+                    <input type="text" [(ngModel)] = "model.username" />
                 </div>
                 <div class="margin-1">
                     <div>Password</div>
-                    <input type="password" />
+                    <input type="password"  [(ngModel)] = "model.password" />
                 </div>
                 <button class="btn btn-primary" (click)="onClick($event)" >login</button>
             </div>
@@ -24,11 +24,16 @@ import { Router } from "@angular/router";
 })
 
 export class LoginComponent {
-    private router:Router = null;
-    constructor(router:Router){
-        this.router = router;
-    }
+    model:any = {};
+    constructor(
+        private router:Router,
+        private authenthication:AuthenthicationService){}
+
     onClick(event:any){
-        this.router.navigate(['home']);
+        this.authenthication.login(this.model.username,this.model.password)
+            .subscribe((result)=>{
+                result && this.router.navigate(['home']);
+            });
+        
     }
 }

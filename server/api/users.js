@@ -23,6 +23,9 @@ router.use((req,res,next)=>{
                 next();
             }
         });
+    } else if( req.url === '/authenticate'){
+        console.log(req.url);
+        next();
     } else {
         // if there is no token
         // return an error
@@ -93,9 +96,9 @@ router.put('/user/:id',(req,res,next)=>{
 });
 
 router.post('/authenticate', function(req, res) {
-    mongo.users.findOne({name:req.body.name},(err, user)=>{
+    mongo.users.findOne({username:req.body.username},(err, user)=>{
         if (err) throw err;
-        
+        console.log(user);        
         if (!user) {
             res.json({ success: false, message: 'Authentication failed. User not found.' });
         } else if (user) {
@@ -104,7 +107,7 @@ router.post('/authenticate', function(req, res) {
                 res.json({ success: false, message: 'Authentication failed. Wrong password.' });
             } else {
                 const token = jwt.sign(user,process.env.APP_SECRET,{
-                    expiresInMinutes:1440 // expire in 24 hour
+                    expiresIn:120 // expire in 24 hour
                 })
                 res.json({
                     success: true,
